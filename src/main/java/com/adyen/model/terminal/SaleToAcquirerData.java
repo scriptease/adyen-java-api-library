@@ -29,8 +29,10 @@ import java.util.Objects;
 import org.apache.commons.codec.binary.Base64;
 
 import com.adyen.model.applicationinfo.ApplicationInfo;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 
 public class SaleToAcquirerData {
 
@@ -48,6 +50,7 @@ public class SaleToAcquirerData {
     private String tenderOption;
     private Map<String, String> additionalData;
     private String authorisationType;
+    private RecurringProcessingModelEnum recurringProcessingModel;
     private static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public SaleToAcquirerData() {
@@ -166,6 +169,38 @@ public class SaleToAcquirerData {
         this.authorisationType = authorisationType;
     }
 
+
+    /**
+     * how the shopper interacts with the system
+     */
+    public enum RecurringProcessingModelEnum {
+        @SerializedName("Subscription") SUBSCRIPTION("Subscription"),
+
+        @SerializedName("CardOnFile") CARD_ON_FILE("CardOnFile"),
+
+        @SerializedName("UnscheduledCardOnFile") UNSCHEDULED_CARD_ON_FILE("UnscheduledCardOnFile");
+
+        @JsonValue
+        private String value;
+
+        RecurringProcessingModelEnum(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+    }
+
+    public RecurringProcessingModelEnum getRecurringProcessingModel() {
+        return this.recurringProcessingModel;
+    }
+
+    public void setRecurringProcessingModel(RecurringProcessingModelEnum recurringProcessingModel) {
+        this.recurringProcessingModel = recurringProcessingModel;
+    }
+
     public static Gson getPrettyPrintGson() {
         return PRETTY_PRINT_GSON;
     }
@@ -192,12 +227,13 @@ public class SaleToAcquirerData {
                 Objects.equals(applicationInfo, that.applicationInfo) &&
                 Objects.equals(tenderOption, that.tenderOption) &&
                 Objects.equals(additionalData, that.additionalData) &&
-                Objects.equals(authorisationType, that.authorisationType);
+                Objects.equals(authorisationType, that.authorisationType) &&
+                Objects.equals(recurringProcessingModel, that.recurringProcessingModel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(metadata, shopperEmail, shopperReference, recurringContract, shopperStatement, recurringDetailName, recurringTokenService, store, merchantAccount, currency, applicationInfo, tenderOption, additionalData, authorisationType);
+        return Objects.hash(metadata, shopperEmail, shopperReference, recurringContract, shopperStatement, recurringDetailName, recurringTokenService, store, merchantAccount, currency, applicationInfo, tenderOption, additionalData, authorisationType, recurringProcessingModel);
     }
 
     @Override
@@ -217,6 +253,7 @@ public class SaleToAcquirerData {
                 ", tenderOption='" + tenderOption + '\'' +
                 ", additionalData=" + additionalData +
                 ", authorisationType=" + authorisationType +
+                ", recurringProcessingModel=" + recurringProcessingModel +
                 '}';
     }
 
