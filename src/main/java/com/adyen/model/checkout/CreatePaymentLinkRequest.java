@@ -219,8 +219,79 @@ public class CreatePaymentLinkRequest {
     @SerializedName("store")
     private String store = null;
 
-    @SerializedName("storePaymentMethod")
-    private Boolean storePaymentMethod = null;
+    /**
+     * Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the &#x60;shopperReference&#x60; is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the &#x60;shopperReference&#x60; is provided, the details will be stored without asking the shopper for consent.
+     */
+    @JsonAdapter(StorePaymentMethodModeEnum.Adapter.class)
+    public enum StorePaymentMethodModeEnum {
+      ASKFORCONSENT("askForConsent"),
+
+      DISABLED("disabled"),
+
+      ENABLED("enabled");
+
+      private String value;
+
+      StorePaymentMethodModeEnum(String value) {
+        this.value = value;
+      }
+
+      public String getValue() {
+        return value;
+      }
+
+      @Override
+      public String toString() {
+        return String.valueOf(value);
+      }
+
+      public static StorePaymentMethodModeEnum fromValue(String value) {
+        for (StorePaymentMethodModeEnum b : StorePaymentMethodModeEnum.values()) {
+          if (b.value.equals(value)) {
+            return b;
+          }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      }
+
+      public static class Adapter extends TypeAdapter<StorePaymentMethodModeEnum> {
+        @Override
+        public void write(final JsonWriter jsonWriter, final StorePaymentMethodModeEnum enumeration) throws IOException {
+          jsonWriter.value(enumeration.getValue());
+        }
+
+        @Override
+        public StorePaymentMethodModeEnum read(final JsonReader jsonReader) throws IOException {
+          String value =  jsonReader.nextString();
+          return StorePaymentMethodModeEnum.fromValue(value);
+        }
+      }
+    }
+
+    public static final String SERIALIZED_NAME_STORE_PAYMENT_METHOD_MODE = "storePaymentMethodMode";
+    @SerializedName(SERIALIZED_NAME_STORE_PAYMENT_METHOD_MODE)
+    private StorePaymentMethodModeEnum storePaymentMethodMode;
+
+
+    public CreatePaymentLinkRequest storePaymentMethodMode(StorePaymentMethodModeEnum storePaymentMethodMode) {
+      this.storePaymentMethodMode = storePaymentMethodMode;
+      return this;
+    }
+
+     /**
+     * Indicates if the details of the payment method will be stored for the shopper. Possible values: * **disabled** – No details will be stored (default). * **askForConsent** – If the &#x60;shopperReference&#x60; is provided, the UI lets the shopper choose if they want their payment details to be stored. * **enabled** – If the &#x60;shopperReference&#x60; is provided, the details will be stored without asking the shopper for consent.
+     * @return storePaymentMethodMode
+    **/
+
+    public StorePaymentMethodModeEnum getStorePaymentMethodMode() {
+      return storePaymentMethodMode;
+    }
+
+
+    public void setStorePaymentMethodMode(StorePaymentMethodModeEnum storePaymentMethodMode) {
+      this.storePaymentMethodMode = storePaymentMethodMode;
+    }
+
 
     public CreatePaymentLinkRequest allowedPaymentMethods(List<String> allowedPaymentMethods) {
         this.allowedPaymentMethods = allowedPaymentMethods;
@@ -737,23 +808,6 @@ public class CreatePaymentLinkRequest {
         this.store = store;
     }
 
-    public CreatePaymentLinkRequest storePaymentMethod(Boolean storePaymentMethod) {
-        this.storePaymentMethod = storePaymentMethod;
-        return this;
-    }
-
-    /**
-     * When this is set to **true** and the &#x60;shopperReference&#x60; is provided, the payment details will be stored.
-     * @return storePaymentMethod
-     **/
-    public Boolean isStorePaymentMethod() {
-        return storePaymentMethod;
-    }
-
-    public void setStorePaymentMethod(Boolean storePaymentMethod) {
-        this.storePaymentMethod = storePaymentMethod;
-    }
-
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -791,12 +845,12 @@ public class CreatePaymentLinkRequest {
                 Objects.equals(this.shopperReference, createPaymentLinkRequest.shopperReference) &&
                 Objects.equals(this.splits, createPaymentLinkRequest.splits) &&
                 Objects.equals(this.store, createPaymentLinkRequest.store) &&
-                Objects.equals(this.storePaymentMethod, createPaymentLinkRequest.storePaymentMethod);
+                Objects.equals(this.storePaymentMethodMode, createPaymentLinkRequest.storePaymentMethodMode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(allowedPaymentMethods, amount, applicationInfo, billingAddress, blockedPaymentMethods, countryCode, deliverAt, deliveryAddress, description, expiresAt, installmentOptions, lineItems, merchantAccount, merchantOrderReference, metadata, recurringProcessingModel, reference, requiredShopperFields, returnUrl, reusable, riskData, shopperEmail, shopperLocale, shopperName, shopperReference, splits, store, storePaymentMethod);
+        return Objects.hash(allowedPaymentMethods, amount, applicationInfo, billingAddress, blockedPaymentMethods, countryCode, deliverAt, deliveryAddress, description, expiresAt, installmentOptions, lineItems, merchantAccount, merchantOrderReference, metadata, recurringProcessingModel, reference, requiredShopperFields, returnUrl, reusable, riskData, shopperEmail, shopperLocale, shopperName, shopperReference, splits, store, storePaymentMethodMode);
     }
 
 
@@ -831,7 +885,7 @@ public class CreatePaymentLinkRequest {
                 "    shopperReference: " + toIndentedString(shopperReference) + "\n" +
                 "    splits: " + toIndentedString(splits) + "\n" +
                 "    store: " + toIndentedString(store) + "\n" +
-                "    storePaymentMethod: " + toIndentedString(storePaymentMethod) + "\n" +
+                "    storePaymentMethodMode: " + toIndentedString(storePaymentMethodMode) + "\n" +
                 "}";
     }
 
