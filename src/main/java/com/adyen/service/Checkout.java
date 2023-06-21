@@ -233,4 +233,20 @@ public class Checkout extends ApiKeyAuthenticatedService {
         return GSON.fromJson(jsonResult, new TypeToken<CreateCheckoutSessionResponse>() {
         }.getType());
     }
+
+    /**
+     * POST /sessions API call
+     *
+     * @param createCheckoutSessionRequest CreateCheckoutSessionRequest
+     * @param requestOptions
+     * @return
+     * @throws ApiException
+     * @throws IOException
+     */
+    public CreateCheckoutSessionResponse sessions(CreateCheckoutSessionRequest createCheckoutSessionRequest, RequestOptions requestOptions) throws ApiException, IOException {
+        String jsonRequest = GSON.toJson(createCheckoutSessionRequest);
+        String jsonResult = sessions.request(jsonRequest, requestOptions);
+        return GSON.fromJson(jsonResult, new TypeToken<CreateCheckoutSessionResponse>() {
+        }.getType());
+    }
 }

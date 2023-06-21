@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Adyen/adyen-java-api-library/badge.svg?branch=master)](https://coveralls.io/github/Adyen/adyen-java-api-library?branch=master)
 
 
-# Adyen Java API Library
+# Adyen Java API Library (Java8 branch)
 
 This is the officially supported Java library for using Adyen's APIs.
  
@@ -41,7 +41,7 @@ You can use Maven and add this dependency to your project's POM:
 <dependency>
   <groupId>com.adyen</groupId>
   <artifactId>adyen-java-api-library</artifactId>
-  <version>17.1.0</version>
+  <version>17.1.4</version>
 </dependency>
 ```
 
