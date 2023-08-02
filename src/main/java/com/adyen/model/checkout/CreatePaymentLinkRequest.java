@@ -807,7 +807,23 @@ public class CreatePaymentLinkRequest {
     public void setStore(String store) {
         this.store = store;
     }
+    
+    @SerializedName("themeId")
+    private String themeId;
 
+
+    public CreatePaymentLinkRequest themeId(String themeId) {
+	this.themeId = themeId;
+	return this;
+    }
+
+    public String getThemeId() {
+	return themeId;
+    }
+
+    public void setThemeId(String themeId) {
+	this.themeId = themeId;
+    }
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -845,12 +861,13 @@ public class CreatePaymentLinkRequest {
                 Objects.equals(this.shopperReference, createPaymentLinkRequest.shopperReference) &&
                 Objects.equals(this.splits, createPaymentLinkRequest.splits) &&
                 Objects.equals(this.store, createPaymentLinkRequest.store) &&
-                Objects.equals(this.storePaymentMethodMode, createPaymentLinkRequest.storePaymentMethodMode);
+                Objects.equals(this.storePaymentMethodMode, createPaymentLinkRequest.storePaymentMethodMode)&&
+                Objects.equals(this.themeId, createPaymentLinkRequest.themeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(allowedPaymentMethods, amount, applicationInfo, billingAddress, blockedPaymentMethods, countryCode, deliverAt, deliveryAddress, description, expiresAt, installmentOptions, lineItems, merchantAccount, merchantOrderReference, metadata, recurringProcessingModel, reference, requiredShopperFields, returnUrl, reusable, riskData, shopperEmail, shopperLocale, shopperName, shopperReference, splits, store, storePaymentMethodMode);
+        return Objects.hash(allowedPaymentMethods, amount, applicationInfo, billingAddress, blockedPaymentMethods, countryCode, deliverAt, deliveryAddress, description, expiresAt, installmentOptions, lineItems, merchantAccount, merchantOrderReference, metadata, recurringProcessingModel, reference, requiredShopperFields, returnUrl, reusable, riskData, shopperEmail, shopperLocale, shopperName, shopperReference, splits, store, storePaymentMethodMode, themeId);
     }
 
 
@@ -886,6 +903,7 @@ public class CreatePaymentLinkRequest {
                 "    splits: " + toIndentedString(splits) + "\n" +
                 "    store: " + toIndentedString(store) + "\n" +
                 "    storePaymentMethodMode: " + toIndentedString(storePaymentMethodMode) + "\n" +
+                "    themeId: " + toIndentedString(themeId) + "\n" +
                 "}";
     }
 

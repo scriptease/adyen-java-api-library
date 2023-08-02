@@ -41,7 +41,7 @@ You can use Maven and add this dependency to your project's POM:
 <dependency>
   <groupId>com.adyen</groupId>
   <artifactId>adyen-java-api-library</artifactId>
-  <version>17.1.5</version>
+  <version>17.1.6</version>
 </dependency>
 ```
 
