@@ -41,7 +41,7 @@ You can use Maven and add this dependency to your project's POM:
 <dependency>
   <groupId>com.adyen</groupId>
   <artifactId>adyen-java-api-library</artifactId>
-  <version>17.1.6</version>
+  <version>17.1.7</version>
 </dependency>
 ```
 
@@ -129,6 +129,10 @@ For a closer look at how our Java library works, you can clone one of our exampl
 
 These include commented code, highlighting key features and concepts, and examples of API calls that can be made using the library.
 
+### Build
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+mvn package -DskipTests
 
 ## Contributing
  

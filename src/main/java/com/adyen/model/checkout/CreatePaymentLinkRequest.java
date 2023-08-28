@@ -291,6 +291,28 @@ public class CreatePaymentLinkRequest {
     public void setStorePaymentMethodMode(StorePaymentMethodModeEnum storePaymentMethodMode) {
       this.storePaymentMethodMode = storePaymentMethodMode;
     }
+    
+    public static final String SHOW_REMOVE_PAYMENT_METHOD_BUTTON = "showRemovePaymentMethodButton";
+    @SerializedName(SHOW_REMOVE_PAYMENT_METHOD_BUTTON)
+    private Boolean showRemovePaymentMethodButton;
+
+
+    public CreatePaymentLinkRequest showRemovePaymentMethodButton(Boolean showRemovePaymentMethodButton) {
+      this.showRemovePaymentMethodButton = showRemovePaymentMethodButton;
+      return this;
+    }
+
+     /**
+     * Set to **false** to hide the button that lets the shopper remove a stored payment method.
+     * @return showRemovePaymentMethodButton
+    **/
+    public Boolean getShowRemovePaymentMethodButton() {
+      return showRemovePaymentMethodButton;
+    }
+
+    public void setShowRemovePaymentMethodButton(Boolean showRemovePaymentMethodButton) {
+      this.showRemovePaymentMethodButton = showRemovePaymentMethodButton;
+    }
 
 
     public CreatePaymentLinkRequest allowedPaymentMethods(List<String> allowedPaymentMethods) {
