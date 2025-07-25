@@ -133,6 +133,11 @@ These include commented code, highlighting key features and concepts, and exampl
 
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 mvn package -DskipTests
+artifactId=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='artifactId']/text()" pom.xml) && \
+version=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" pom.xml) && \
+mkdir -p target && \
+cp pom.xml target/${artifactId}-${version}.pom && \
+echo "Copied to target/${artifactId}-${version}.pom"
 
 ## Contributing
  
