@@ -1,5 +1,7 @@
 package com.adyen.serializer;
 
+import com.adyen.model.Address;
+import com.adyen.model.Name;
 import com.adyen.model.applicationinfo.ApplicationInfo;
 import com.adyen.model.applicationinfo.ExternalPlatform;
 import com.adyen.model.applicationinfo.MerchantDevice;
@@ -29,7 +31,26 @@ public class SaleToAcquirerDataSerializerTest {
         metadata.put("key", "value");
         saleToAcquirerData.setMetadata(metadata);
         saleToAcquirerData.setShopperEmail("myemail@mail.com");
+        Name shopperName = new Name();
+        shopperName.setFirstName("John");
+        shopperName.setLastName("Smith");
+        saleToAcquirerData.setShopperName(shopperName);
+        saleToAcquirerData.setTelephoneNumber("+49123456789");
         saleToAcquirerData.setShopperReference("13164308");
+        Address billingAddress = new Address();
+        billingAddress.setStreet("Billing Street");
+        billingAddress.setHouseNumberOrName("42");
+        billingAddress.setPostalCode("70176");
+        billingAddress.setCity("Stuttgart");
+        billingAddress.setCountry("DE");
+        saleToAcquirerData.setBillingAddress(billingAddress);
+        Address deliveryAddress = new Address();
+        deliveryAddress.setStreet("Delivery Street");
+        deliveryAddress.setHouseNumberOrName("84");
+        deliveryAddress.setPostalCode("70174");
+        deliveryAddress.setCity("Stuttgart");
+        deliveryAddress.setCountry("DE");
+        saleToAcquirerData.setDeliveryAddress(deliveryAddress);
         saleToAcquirerData.setRecurringContract("RECURRING,ONECLICK");
         saleToAcquirerData.setShopperStatement("YOUR SHOPPER STATEMENT");
         saleToAcquirerData.setRecurringDetailName("VALUE");
@@ -66,7 +87,26 @@ public class SaleToAcquirerDataSerializerTest {
                 "    \"key\": \"value\"\n" +
                 "  },\n" +
                 "  \"shopperEmail\": \"myemail@mail.com\",\n" +
+                "  \"shopperName\": {\n" +
+                "    \"lastName\": \"Smith\",\n" +
+                "    \"firstName\": \"John\"\n" +
+                "  },\n" +
+                "  \"telephoneNumber\": \"+49123456789\",\n" +
                 "  \"shopperReference\": \"13164308\",\n" +
+                "  \"billingAddress\": {\n" +
+                "    \"city\": \"Stuttgart\",\n" +
+                "    \"country\": \"DE\",\n" +
+                "    \"houseNumberOrName\": \"42\",\n" +
+                "    \"postalCode\": \"70176\",\n" +
+                "    \"street\": \"Billing Street\"\n" +
+                "  },\n" +
+                "  \"deliveryAddress\": {\n" +
+                "    \"city\": \"Stuttgart\",\n" +
+                "    \"country\": \"DE\",\n" +
+                "    \"houseNumberOrName\": \"84\",\n" +
+                "    \"postalCode\": \"70174\",\n" +
+                "    \"street\": \"Delivery Street\"\n" +
+                "  },\n" +
                 "  \"recurringContract\": \"RECURRING,ONECLICK\",\n" +
                 "  \"shopperStatement\": \"YOUR SHOPPER STATEMENT\",\n" +
                 "  \"recurringDetailName\": \"VALUE\",\n" +

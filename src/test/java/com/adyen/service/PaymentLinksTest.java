@@ -24,6 +24,7 @@ import com.adyen.BaseTest;
 import com.adyen.Client;
 import com.adyen.model.Address;
 import com.adyen.model.Amount;
+import com.adyen.model.Name;
 import com.adyen.model.checkout.CreatePaymentLinkRequest;
 import com.adyen.model.checkout.PaymentLinkResource;
 import com.adyen.model.checkout.UpdatePaymentLinkRequest;
@@ -35,6 +36,7 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PaymentLinksTest extends BaseTest {
@@ -111,6 +113,16 @@ public class PaymentLinksTest extends BaseTest {
         assertPaymentLinkResource(paymentLink, PaymentLinkResource.StatusEnum.EXPIRED);
     }
 
+    @Test
+    public void TestCreatePaymentLinksRequestSerializationIncludesShopperData() {
+        String json = GSON.toJson(createPaymentLinkRequest());
+
+        assertTrue(json.contains("\"telephoneNumber\":\"+49123456789\""));
+        assertTrue(json.contains("\"shopperName\":{\"lastName\":\"Smith\",\"firstName\":\"John\"}"));
+        assertTrue(json.contains("\"billingAddress\""));
+        assertTrue(json.contains("\"deliveryAddress\""));
+    }
+
     private void assertPaymentLinkResource(PaymentLinkResource paymentLink, PaymentLinkResource.StatusEnum status) {
         assertNotNull(paymentLink);
         assertNotNull(paymentLink.getId());
@@ -138,8 +150,13 @@ public class PaymentLinksTest extends BaseTest {
         createPaymentLinkRequest.setShopperReference("YOUR_UNIQUE_SHOPPER_ID");
         createPaymentLinkRequest.setShopperEmail("test@email.com");
         createPaymentLinkRequest.setShopperLocale("pt_BR");
+        createPaymentLinkRequest.setTelephoneNumber("+49123456789");
         createPaymentLinkRequest.setExpiresAt("2019-12-17T10:05:29Z");
         createPaymentLinkRequest.setRequiredShopperFields(Collections.singletonList(CreatePaymentLinkRequest.RequiredShopperFieldsEnum.DELIVERYADDRESS));
+        Name shopperName = new Name();
+        shopperName.setFirstName("John");
+        shopperName.setLastName("Smith");
+        createPaymentLinkRequest.setShopperName(shopperName);
         Address address = new Address();
         address.setStreet("Street");
         address.setPostalCode("59000060");

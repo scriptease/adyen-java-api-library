@@ -28,6 +28,8 @@ import java.util.Objects;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.adyen.model.Address;
+import com.adyen.model.Name;
 import com.adyen.model.applicationinfo.ApplicationInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.gson.Gson;
@@ -38,7 +40,11 @@ public class SaleToAcquirerData {
 
     private Map<String, String> metadata;
     private String shopperEmail;
+    private Name shopperName;
+    private String telephoneNumber;
     private String shopperReference;
+    private Address billingAddress;
+    private Address deliveryAddress;
     private String recurringContract;
     private String shopperStatement;
     private String recurringDetailName;
@@ -73,12 +79,44 @@ public class SaleToAcquirerData {
         this.shopperEmail = shopperEmail;
     }
 
+    public Name getShopperName() {
+        return shopperName;
+    }
+
+    public void setShopperName(Name shopperName) {
+        this.shopperName = shopperName;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
     public String getShopperReference() {
         return shopperReference;
     }
 
     public void setShopperReference(String shopperReference) {
         this.shopperReference = shopperReference;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
 
     public String getRecurringContract() {
@@ -216,7 +254,11 @@ public class SaleToAcquirerData {
         SaleToAcquirerData that = (SaleToAcquirerData) o;
         return Objects.equals(metadata, that.metadata) &&
                 Objects.equals(shopperEmail, that.shopperEmail) &&
+                Objects.equals(shopperName, that.shopperName) &&
+                Objects.equals(telephoneNumber, that.telephoneNumber) &&
                 Objects.equals(shopperReference, that.shopperReference) &&
+                Objects.equals(billingAddress, that.billingAddress) &&
+                Objects.equals(deliveryAddress, that.deliveryAddress) &&
                 Objects.equals(recurringContract, that.recurringContract) &&
                 Objects.equals(shopperStatement, that.shopperStatement) &&
                 Objects.equals(recurringDetailName, that.recurringDetailName) &&
@@ -233,7 +275,7 @@ public class SaleToAcquirerData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(metadata, shopperEmail, shopperReference, recurringContract, shopperStatement, recurringDetailName, recurringTokenService, store, merchantAccount, currency, applicationInfo, tenderOption, additionalData, authorisationType, recurringProcessingModel);
+        return Objects.hash(metadata, shopperEmail, shopperName, telephoneNumber, shopperReference, billingAddress, deliveryAddress, recurringContract, shopperStatement, recurringDetailName, recurringTokenService, store, merchantAccount, currency, applicationInfo, tenderOption, additionalData, authorisationType, recurringProcessingModel);
     }
 
     @Override
@@ -241,7 +283,11 @@ public class SaleToAcquirerData {
         return "SaleToAcquirerDataModel{" +
                 "metadata=" + metadata +
                 ", shopperEmail='" + shopperEmail + '\'' +
+                ", shopperName=" + shopperName +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", shopperReference='" + shopperReference + '\'' +
+                ", billingAddress=" + billingAddress +
+                ", deliveryAddress=" + deliveryAddress +
                 ", recurringContract='" + recurringContract + '\'' +
                 ", shopperStatement='" + shopperStatement + '\'' +
                 ", recurringDetailName='" + recurringDetailName + '\'' +

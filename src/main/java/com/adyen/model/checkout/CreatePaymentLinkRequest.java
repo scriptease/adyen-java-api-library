@@ -213,6 +213,9 @@ public class CreatePaymentLinkRequest {
     @SerializedName("shopperReference")
     private String shopperReference = null;
 
+    @SerializedName("telephoneNumber")
+    private String telephoneNumber = null;
+
     @SerializedName("splits")
     private List<Split> splits = null;
 
@@ -788,6 +791,23 @@ public class CreatePaymentLinkRequest {
         this.shopperReference = shopperReference;
     }
 
+    public CreatePaymentLinkRequest telephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+        return this;
+    }
+
+    /**
+     * The shopper&#x27;s phone number.
+     * @return telephoneNumber
+     **/
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
     public CreatePaymentLinkRequest splits(List<Split> splits) {
         this.splits = splits;
         return this;
@@ -881,15 +901,16 @@ public class CreatePaymentLinkRequest {
                 Objects.equals(this.shopperLocale, createPaymentLinkRequest.shopperLocale) &&
                 Objects.equals(this.shopperName, createPaymentLinkRequest.shopperName) &&
                 Objects.equals(this.shopperReference, createPaymentLinkRequest.shopperReference) &&
+                Objects.equals(this.telephoneNumber, createPaymentLinkRequest.telephoneNumber) &&
                 Objects.equals(this.splits, createPaymentLinkRequest.splits) &&
                 Objects.equals(this.store, createPaymentLinkRequest.store) &&
-                Objects.equals(this.storePaymentMethodMode, createPaymentLinkRequest.storePaymentMethodMode)&&
+                Objects.equals(this.storePaymentMethodMode, createPaymentLinkRequest.storePaymentMethodMode) &&
                 Objects.equals(this.themeId, createPaymentLinkRequest.themeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(allowedPaymentMethods, amount, applicationInfo, billingAddress, blockedPaymentMethods, countryCode, deliverAt, deliveryAddress, description, expiresAt, installmentOptions, lineItems, merchantAccount, merchantOrderReference, metadata, recurringProcessingModel, reference, requiredShopperFields, returnUrl, reusable, riskData, shopperEmail, shopperLocale, shopperName, shopperReference, splits, store, storePaymentMethodMode, themeId);
+        return Objects.hash(allowedPaymentMethods, amount, applicationInfo, billingAddress, blockedPaymentMethods, countryCode, deliverAt, deliveryAddress, description, expiresAt, installmentOptions, lineItems, merchantAccount, merchantOrderReference, metadata, recurringProcessingModel, reference, requiredShopperFields, returnUrl, reusable, riskData, shopperEmail, shopperLocale, shopperName, shopperReference, telephoneNumber, splits, store, storePaymentMethodMode, themeId);
     }
 
 
@@ -922,6 +943,7 @@ public class CreatePaymentLinkRequest {
                 "    shopperLocale: " + toIndentedString(shopperLocale) + "\n" +
                 "    shopperName: " + toIndentedString(shopperName) + "\n" +
                 "    shopperReference: " + toIndentedString(shopperReference) + "\n" +
+                "    telephoneNumber: " + toIndentedString(telephoneNumber) + "\n" +
                 "    splits: " + toIndentedString(splits) + "\n" +
                 "    store: " + toIndentedString(store) + "\n" +
                 "    storePaymentMethodMode: " + toIndentedString(storePaymentMethodMode) + "\n" +
