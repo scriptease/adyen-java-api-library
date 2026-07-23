@@ -32,6 +32,8 @@ import java.util.Arrays;
  *     &lt;enumeration value="CardInserted"/&gt;
  *     &lt;enumeration value="CardRemoved"/&gt;
  *     &lt;enumeration value="Reject"/&gt;
+ *     &lt;enumeration value="NetworkConnected"/&gt;
+ *     &lt;enumeration value="NetworkDisconnected"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
  * </pre>
@@ -151,7 +153,21 @@ public enum EventToNotifyType {
      */
     @XmlEnumValue("Reject")
     @Schema(description = "A message request is rejected. An error explanation and the message in error have to be put in the EventDetails data element.")
-    REJECT("Reject");
+    REJECT("Reject"),
+
+    /**
+     * The POI Terminal has (re)connected to the network.
+     */
+    @XmlEnumValue("NetworkConnected")
+    @Schema(description = "The POI Terminal has (re)connected to the network.")
+    NETWORK_CONNECTED("NetworkConnected"),
+
+    /**
+     * The POI Terminal has lost its network connection.
+     */
+    @XmlEnumValue("NetworkDisconnected")
+    @Schema(description = "The POI Terminal has lost its network connection.")
+    NETWORK_DISCONNECTED("NetworkDisconnected");
     private final String value;
 
     EventToNotifyType(String v) {
